@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grade Tracker</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="app-title">📊 Grade Tracker</h1>
+    <p class="subtitle">Track your academic performance · NIT Grading System</p>
+
+    <!-- SEMESTER TABS -->
+    <div class="sem-tabs">
+      <div class="sem-list" id="semList"></div>
+      <button class="btn-add-sem" onclick="addSemester()">+ Add Semester</button>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <span id="cgpaVal">—</span>
+        <label>CGPA</label>
+      </div>
+      <div class="stat-card">
+        <span id="sgpaVal">—</span>
+        <label>Current SGPA</label>
+      </div>
+      <div class="stat-card">
+        <span id="creditsVal">0</span>
+        <label>Total Credits</label>
+      </div>
+      <div class="stat-card">
+        <span id="subjectsVal">0</span>
+        <label>Subjects</label>
+      </div>
+    </div>
+
+    <div class="main-grid">
+
+      <!-- LEFT -->
+      <div class="left-col">
+
+        <!-- ADD SUBJECT -->
+        <div class="card">
+          <h3>Add Subject</h3>
+          <div class="form-group">
+            <label>Subject Name</label>
+            <input type="text" id="subjectName"
+                   placeholder="e.g. Engineering Mathematics..."/>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Credits</label>
+              <input type="number" id="subjectCredits"
+                     placeholder="e.g. 4" min="1" max="6"/>
+            </div>
+            <div class="form-group">
+              <label>Marks (out of 100)</label>
+              <input type="number" id="subjectMarks"
+                     placeholder="e.g. 85" min="0" max="100"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Type</label>
+            <select id="subjectType">
+              <option value="theory">Theory</option>
+              <option value="lab">Lab</option>
+              <option value="elective">Elective</option>
+            </select>
+          </div>
+          <button class="btn-primary" onclick="addSubject()">+ Add Subject</button>
+        </div>
+
+        <!-- GRADE SCALE -->
+        <div class="card">
+          <h3>Grade Scale (NIT)</h3>
+          <div class="grade-scale">
+            <div class="grade-row header">
+              <span>Marks</span><span>Grade</span><span>Points</span>
+            </div>
+            <div class="grade-row"><span>90-100</span><span class="g-O">O</span><span>10</span></div>
+            <div class="grade-row"><span>80-89</span><span class="g-A">A+</span><span>9</span></div>
+            <div class="grade-row"><span>70-79</span><span class="g-A">A</span><span>8</span></div>
+            <div class="grade-row"><span>60-69</span><span class="g-B">B+</span><span>7</span></div>
+            <div class="grade-row"><span>50-59</span><span class="g-B">B</span><span>6</span></div>
+            <div class="grade-row"><span>40-49</span><span class="g-C">C</span><span>5</span></div>
+            <div class="grade-row"><span>Below 40</span><span class="g-F">F</span><span>0</span></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+      <div class="right-col">
+
+        <!-- SUBJECTS TABLE -->
+        <div class="card">
+          <div class="card-header">
+            <h3 id="semTitle">Semester 1</h3>
+            <div class="header-actions">
+              <span id="sgpaBadge" class="sgpa-badge"></span>
+              <button class="btn-export" onclick="exportReport()">
+                📄 Export
+              </button>
+            </div>
+          </div>
+          <div class="subjects-wrap" id="subjectsWrap">
+            <p class="empty-hint">Add subjects to track your grades</p>
+          </div>
+        </div>
+
+        <!-- CHART -->
+        <div class="card">
+          <h3>Performance Chart</h3>
+          <div style="position:relative;height:240px;">
+            <canvas id="perfChart"
+              role="img"
+              aria-label="Bar chart showing marks per subject">
+              Subject performance chart
+            </canvas>
+          </div>
+        </div>
+
+        <!-- CGPA TREND -->
+        <div class="card">
+          <h3>CGPA Trend</h3>
+          <div style="position:relative;height:180px;">
+            <canvas id="cgpaChart"
+              role="img"
+              aria-label="Line chart showing CGPA trend across semesters">
+              CGPA trend chart
+            </canvas>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>Day 40 of 120 · Kishalaya Sarangi · NIT Rourkela</footer>
+  <script src="script.js"></script>
+</body>
+</html>
